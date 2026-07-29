@@ -247,21 +247,20 @@ function saveGejala() {
 
 function deleteGejala(id) {
   const item = dataGejala.find(g => g.id === id);
-  showConfirm('Hapus Gejala', `Yakin ingin menghapus "${item?.nama}"?`, () => {
-    dataGejala = dataGejala.filter(g => g.id !== id);
-    // Also remove from rules
-    dataRules.forEach(r => {
-      r.gejalaIds = r.gejalaIds.filter(gid => gid !== id);
-    });
-    // Remove rules with no gejala
-    dataRules = dataRules.filter(r => r.gejalaIds.length > 0);
-    saveData(STORE_KEYS.gejala, dataGejala);
-    saveData(STORE_KEYS.rules, dataRules);
-    renderGejala();
-    renderRules();
-    updateStats();
-    showToast('Gejala berhasil dihapus');
+  if (!window.confirm(`Yakin ingin menghapus gejala "${item?.nama}"?`)) return;
+  dataGejala = dataGejala.filter(g => g.id !== id);
+  // Also remove from rules
+  dataRules.forEach(r => {
+    r.gejalaIds = r.gejalaIds.filter(gid => gid !== id);
   });
+  // Remove rules with no gejala
+  dataRules = dataRules.filter(r => r.gejalaIds.length > 0);
+  saveData(STORE_KEYS.gejala, dataGejala);
+  saveData(STORE_KEYS.rules, dataRules);
+  renderGejala();
+  renderRules();
+  updateStats();
+  showToast('Gejala berhasil dihapus');
 }
 
 function renderGejala() {
@@ -335,17 +334,16 @@ function saveKerusakan() {
 
 function deleteKerusakan(id) {
   const item = dataKerusakan.find(k => k.id === id);
-  showConfirm('Hapus Kerusakan', `Yakin ingin menghapus "${item?.nama}"?`, () => {
-    dataKerusakan = dataKerusakan.filter(k => k.id !== id);
-    // Remove rules referencing this kerusakan
-    dataRules = dataRules.filter(r => r.kerusakanId !== id);
-    saveData(STORE_KEYS.kerusakan, dataKerusakan);
-    saveData(STORE_KEYS.rules, dataRules);
-    renderKerusakan();
-    renderRules();
-    updateStats();
-    showToast('Kerusakan berhasil dihapus');
-  });
+  if (!window.confirm(`Yakin ingin menghapus kerusakan "${item?.nama}"?`)) return;
+  dataKerusakan = dataKerusakan.filter(k => k.id !== id);
+  // Remove rules referencing this kerusakan
+  dataRules = dataRules.filter(r => r.kerusakanId !== id);
+  saveData(STORE_KEYS.kerusakan, dataKerusakan);
+  saveData(STORE_KEYS.rules, dataRules);
+  renderKerusakan();
+  renderRules();
+  updateStats();
+  showToast('Kerusakan berhasil dihapus');
 }
 
 function renderKerusakan() {
@@ -425,13 +423,12 @@ function saveRule() {
 }
 
 function deleteRule(id) {
-  showConfirm('Hapus Rule', 'Yakin ingin menghapus rule ini?', () => {
-    dataRules = dataRules.filter(r => r.id !== id);
-    saveData(STORE_KEYS.rules, dataRules);
-    renderRules();
-    updateStats();
-    showToast('Rule berhasil dihapus');
-  });
+  if (!window.confirm('Yakin ingin menghapus rule ini?')) return;
+  dataRules = dataRules.filter(r => r.id !== id);
+  saveData(STORE_KEYS.rules, dataRules);
+  renderRules();
+  updateStats();
+  showToast('Rule berhasil dihapus');
 }
 
 function renderRules() {
@@ -614,3 +611,64 @@ function init() {
 }
 
 init();
+
+// ==================== IMPORT/EXPORT ====================
+function exportData() {
+  const data = {
+    gejala: dataGejala,
+    kerusakan: dataKerusakan,
+    rules: dataRules
+  };
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'sistem-pakar-data.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Data exported successfully');
+}
+
+function handleImportFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (imported.gejala) dataGejala = imported.gejala;
+      if (imported.kerusakan) dataKerusakan = imported.kerusakan;
+      if (imported.rules) dataRules = imported.rules;
+      // Persist
+      saveData(STORE_KEYS.gejala, dataGejala);
+      saveData(STORE_KEYS.kerusakan, dataKerusakan);
+      saveData(STORE_KEYS.rules, dataRules);
+      // Refresh UI
+      renderGejala();
+      renderKerusakan();
+      renderRules();
+      updateStats();
+      showToast('Data imported successfully');
+    } catch (err) {
+      console.error(err);
+      showToast('Failed to import: invalid JSON', 'error');
+    }
+  };
+  reader.readAsText(file);
+}
+
+// Attach event listeners after DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  const exportBtn = document.getElementById('btnExport');
+  if (exportBtn) exportBtn.addEventListener('click', exportData);
+  const importBtn = document.getElementById('btnImport');
+  const fileInput = document.getElementById('fileInput');
+  if (importBtn && fileInput) {
+    importBtn.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) handleImportFile(file);
+      // Reset the input value to allow re-importing same file if needed
+      e.target.value = '';
+    });
+  }
+});
