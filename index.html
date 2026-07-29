@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistem Pakar Diagnosa Kerusakan - Rule Based Expert System">
+  <title>Sistem Pakar - Diagnosa Kerusakan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background animated blobs -->
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Sistem Pakar</h1>
+          <p class="subtitle">Diagnosa Kerusakan — Rule Based</p>
+        </div>
+      </div>
+      <div class="header-stats" id="headerStats">
+        <div class="stat-badge">
+          <span class="stat-num" id="statGejala">0</span>
+          <span class="stat-label">Gejala</span>
+        </div>
+        <div class="stat-badge">
+          <span class="stat-num" id="statKerusakan">0</span>
+          <span class="stat-label">Kerusakan</span>
+        </div>
+        <div class="stat-badge">
+          <span class="stat-num" id="statRule">0</span>
+          <span class="stat-label">Rule</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="gejala" id="tabBtnGejala">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+        </svg>
+        Daftar Gejala
+      </button>
+      <button class="tab-btn" data-tab="kerusakan" id="tabBtnKerusakan">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        Daftar Kerusakan
+      </button>
+      <button class="tab-btn" data-tab="rule" id="tabBtnRule">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        </svg>
+        Rule Based
+      </button>
+      <button class="tab-btn" data-tab="diagnosa" id="tabBtnDiagnosa">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        Diagnosa
+      </button>
+    </nav>
+
+    <!-- Tab Content -->
+    <main class="tab-content">
+
+      <!-- ==================== TAB GEJALA ==================== -->
+      <section class="tab-panel active" id="panelGejala">
+        <div class="panel-header">
+          <div>
+            <h2>Daftar Gejala</h2>
+            <p>Kelola semua data gejala yang digunakan dalam sistem pakar.</p>
+          </div>
+          <button class="btn btn-primary" id="btnAddGejala" onclick="openModal('gejala')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Tambah Gejala
+          </button>
+        </div>
+        <div class="search-bar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Cari gejala..." id="searchGejala" oninput="renderGejala()">
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table" id="tableGejala">
+            <thead>
+              <tr>
+                <th width="80">Kode</th>
+                <th>Nama Gejala</th>
+                <th width="120">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyGejala"></tbody>
+          </table>
+          <div class="empty-state" id="emptyGejala">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <p>Belum ada data gejala</p>
+            <span>Klik "Tambah Gejala" untuk memulai</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB KERUSAKAN ==================== -->
+      <section class="tab-panel" id="panelKerusakan">
+        <div class="panel-header">
+          <div>
+            <h2>Daftar Kerusakan</h2>
+            <p>Kelola semua data kerusakan yang dapat didiagnosa oleh sistem.</p>
+          </div>
+          <button class="btn btn-primary" id="btnAddKerusakan" onclick="openModal('kerusakan')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Tambah Kerusakan
+          </button>
+        </div>
+        <div class="search-bar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Cari kerusakan..." id="searchKerusakan" oninput="renderKerusakan()">
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table" id="tableKerusakan">
+            <thead>
+              <tr>
+                <th width="80">Kode</th>
+                <th>Nama Kerusakan</th>
+                <th>Solusi</th>
+                <th width="120">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyKerusakan"></tbody>
+          </table>
+          <div class="empty-state" id="emptyKerusakan">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <p>Belum ada data kerusakan</p>
+            <span>Klik "Tambah Kerusakan" untuk memulai</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB RULE ==================== -->
+      <section class="tab-panel" id="panelRule">
+        <div class="panel-header">
+          <div>
+            <h2>Rule Based</h2>
+            <p>Tentukan hubungan antara gejala dan kerusakan untuk membuat aturan diagnosa.</p>
+          </div>
+          <button class="btn btn-primary" id="btnAddRule" onclick="openModal('rule')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Tambah Rule
+          </button>
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table" id="tableRule">
+            <thead>
+              <tr>
+                <th width="80">No</th>
+                <th>Kerusakan</th>
+                <th>Gejala Terkait</th>
+                <th width="120">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyRule"></tbody>
+          </table>
+          <div class="empty-state" id="emptyRule">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <p>Belum ada rule</p>
+            <span>Tambahkan gejala & kerusakan dahulu, lalu buat rule</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB DIAGNOSA ==================== -->
+      <section class="tab-panel" id="panelDiagnosa">
+        <div class="panel-header">
+          <div>
+            <h2>Diagnosa</h2>
+            <p>Pilih gejala yang dialami untuk mendapatkan hasil diagnosa kerusakan.</p>
+          </div>
+          <button class="btn btn-secondary" id="btnResetDiagnosa" onclick="resetDiagnosa()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Reset
+          </button>
+        </div>
+
+        <div class="diagnosa-layout">
+          <div class="diagnosa-select-area">
+            <h3>Pilih Gejala yang Dialami</h3>
+            <div class="checkbox-list" id="diagnosaGejalaList">
+              <p class="text-muted">Tidak ada gejala tersedia. Tambahkan gejala terlebih dahulu.</p>
+            </div>
+            <button class="btn btn-primary btn-full" id="btnProsesDiagnosa" onclick="prosesDiagnosa()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Proses Diagnosa
+            </button>
+          </div>
+
+          <div class="diagnosa-result-area" id="diagnosaResultArea">
+            <div class="result-placeholder" id="resultPlaceholder">
+              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.3">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <p>Hasil diagnosa akan muncul di sini</p>
+              <span>Pilih gejala lalu klik "Proses Diagnosa"</span>
+            </div>
+            <div class="result-content" id="resultContent" style="display:none;"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ==================== MODAL ==================== -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal" id="modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modalTitle">Tambah Data</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal()">Batal</button>
+        <button class="btn btn-primary" id="btnModalSave" onclick="saveModal()">Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Confirm dialog -->
+  <div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-dialog">
+      <div class="confirm-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <h3 id="confirmTitle">Konfirmasi</h3>
+      <p id="confirmMsg">Apakah Anda yakin?</p>
+      <div class="confirm-actions">
+        <button class="btn btn-ghost" onclick="closeConfirm()">Batal</button>
+        <button class="btn btn-danger" id="btnConfirmYes">Hapus</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
