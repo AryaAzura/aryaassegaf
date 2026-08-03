@@ -1,0 +1,724 @@
+/* ============================================================
+   Laporan Diagnosa — Print-Ready Stylesheet
+   White background, professional layout, A4 optimized
+   ============================================================ */
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background: #e5e7eb;
+  color: #1a1a2e;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Toolbar (screen only) ---------- */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 28px;
+  background: #1e1b4b;
+  color: white;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+
+.toolbar-left { display: flex; align-items: center; gap: 12px; }
+
+.toolbar-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #c4b5fd;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.toolbar-back:hover { color: white; }
+
+.toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, #059669, #047857);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 10px rgba(5,150,105,0.35);
+}
+
+.toolbar-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(5,150,105,0.5);
+}
+
+/* ---------- Paper ---------- */
+.paper {
+  max-width: 794px; /* A4 width at 96dpi */
+  margin: 32px auto;
+  padding: 48px 52px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+}
+
+/* ---------- Report Header ---------- */
+.report-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 18px;
+  border-bottom: 3px solid #4f46e5;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-logo {
+  width: 54px;
+  height: 54px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 3px 12px rgba(79,70,229,0.3);
+}
+
+.header-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e1b4b;
+  line-height: 1.2;
+}
+
+.header-sub {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.header-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.doc-meta {
+  font-size: 0.73rem;
+  color: #6b7280;
+  line-height: 1.9;
+}
+
+.doc-meta span {
+  margin-right: 6px;
+}
+
+.doc-meta strong {
+  color: #374151;
+  font-weight: 600;
+}
+
+/* ---------- Report Title ---------- */
+.report-title {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.report-title h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #1e1b4b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+.report-title p {
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+/* ---------- Section ---------- */
+.section {
+  margin-bottom: 24px;
+}
+
+.section-heading {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #4f46e5;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+  border-bottom: 1.5px solid #e5e7eb;
+}
+
+/* ---------- Info Table ---------- */
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.info-table th {
+  background: #f8fafc;
+  color: #374151;
+  font-weight: 600;
+  padding: 9px 16px;
+  text-align: left;
+  width: 38%;
+  border-bottom: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+}
+
+.info-table td {
+  padding: 9px 16px;
+  color: #111827;
+  border-bottom: 1px solid #f3f4f6;
+  font-weight: 500;
+}
+
+.info-table tr:last-child th,
+.info-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ---------- Gejala Table ---------- */
+.gejala-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.gejala-table thead th {
+  background: #f3f4f6;
+  color: #374151;
+  font-weight: 600;
+  padding: 8px 14px;
+  text-align: left;
+  border-bottom: 1.5px solid #d1d5db;
+}
+
+.gejala-table tbody td {
+  padding: 7px 14px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #111827;
+}
+
+.gejala-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.gejala-table .kode-cell {
+  font-weight: 700;
+  color: #4f46e5;
+  font-size: 0.78rem;
+}
+
+.gejala-table .no-cell {
+  color: #9ca3af;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ---------- Result Card ---------- */
+.result-card {
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.result-card.rank-1 {
+  border-color: #22c55e;
+  border-width: 2px;
+  background: #f0fdf4;
+}
+
+.result-card.rank-2 {
+  border-color: #eab308;
+  background: #fefce8;
+}
+
+.result-card.rank-other {
+  background: #f9fafb;
+}
+
+.result-rank {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9ca3af;
+  margin-bottom: 3px;
+}
+
+.result-card.rank-1 .result-rank { color: #16a34a; }
+.result-card.rank-2 .result-rank { color: #ca8a04; }
+
+.result-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.result-pct {
+  font-size: 0.82rem;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.result-pct strong {
+  font-size: 1.1em;
+}
+
+/* Progress bar */
+.progress-wrap {
+  background: #e5e7eb;
+  border-radius: 99px;
+  height: 10px;
+  width: 100%;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 10px;
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+/* Matched gejala tags */
+.matched-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.matched-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 6px;
+}
+
+.matched-tag {
+  background: #ede9fe;
+  color: #4c1d95;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid #c4b5fd;
+}
+
+/* Solusi box */
+.solusi-box {
+  background: #fff7ed;
+  border-left: 3px solid #f59e0b;
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.solusi-box .solusi-label {
+  color: #d97706;
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+/* ---------- Disclaimer ---------- */
+.disclaimer {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.disclaimer strong {
+  color: #475569;
+}
+
+/* ---------- Footer / Signature ---------- */
+.report-footer {
+  border-top: 2px solid #e5e7eb;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.footer-left {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  line-height: 1.8;
+}
+
+.footer-signature {
+  text-align: center;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.signature-space {
+  height: 60px;
+}
+
+.signature-date {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.signature-gap {
+  height: 54px;
+}
+
+.signature-line {
+  width: 180px;
+  border-bottom: 1px solid #374151;
+  margin: 0 auto 4px;
+}
+
+.signature-date span {
+  margin-right: 4px;
+}
+
+.signature-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1px;
+}
+
+.signature-role {
+  font-size: 0.72rem;
+  color: #6b7280;
+}
+
+/* ---------- No Data Message ---------- */
+.no-data-msg {
+  text-align: center;
+  padding: 80px 30px;
+  color: #6b7280;
+}
+
+.no-data-msg svg {
+  margin-bottom: 16px;
+  opacity: 0.4;
+}
+
+.no-data-msg h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.no-data-msg p {
+  font-size: 0.9rem;
+  max-width: 400px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+}
+
+.back-link {
+  display: inline-block;
+  padding: 10px 24px;
+  background: #4f46e5;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-link:hover { background: #4338ca; }
+
+/* ============================================================
+   PRINT-SPECIFIC OVERRIDES — Compact 1-Page A4 Layout
+   ============================================================ */
+@media print {
+  .no-print { display: none !important; }
+
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm 10mm 12mm;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    background: white !important;
+    margin: 0;
+    padding: 0;
+    font-size: 9pt;
+  }
+
+  .paper {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  /* ---- Compact Header ---- */
+  .report-header {
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+
+  .header-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 7px;
+  }
+
+  .header-logo svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .header-title {
+    font-size: 10pt;
+  }
+
+  .header-sub {
+    font-size: 7.5pt;
+  }
+
+  .doc-meta {
+    font-size: 7pt;
+    line-height: 1.7;
+  }
+
+  /* ---- Compact Title ---- */
+  .report-title {
+    margin-bottom: 10px;
+  }
+
+  .report-title h2 {
+    font-size: 12pt;
+    margin-bottom: 2px;
+  }
+
+  .report-title p {
+    font-size: 7pt;
+  }
+
+  /* ---- Compact Section ---- */
+  .section {
+    margin-bottom: 10px;
+  }
+
+  .section-heading {
+    font-size: 7.5pt;
+    padding-bottom: 3px;
+    margin-bottom: 6px;
+  }
+
+  /* ---- Compact Info Table ---- */
+  .info-table {
+    font-size: 8pt;
+  }
+
+  .info-table th,
+  .info-table td {
+    padding: 5px 10px;
+  }
+
+  /* ---- Compact Gejala Table ---- */
+  .gejala-table {
+    font-size: 7.5pt;
+  }
+
+  .gejala-table thead th {
+    padding: 5px 10px;
+  }
+
+  .gejala-table tbody td {
+    padding: 4px 10px;
+  }
+
+  /* ---- Compact Result Cards ---- */
+  .result-card {
+    padding: 8px 12px;
+    margin-bottom: 7px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-radius: 6px;
+  }
+
+  .result-rank {
+    font-size: 6.5pt;
+    margin-bottom: 1px;
+  }
+
+  .result-name {
+    font-size: 10pt;
+    margin-bottom: 3px;
+  }
+
+  .result-pct {
+    font-size: 7.5pt;
+    margin-bottom: 4px;
+  }
+
+  .progress-wrap {
+    height: 6px;
+    margin-bottom: 6px;
+  }
+
+  .progress-bar {
+    height: 6px;
+  }
+
+  .matched-label {
+    font-size: 6.5pt;
+    margin-bottom: 3px;
+  }
+
+  .matched-tags {
+    gap: 3px;
+    margin-bottom: 4px;
+  }
+
+  .matched-tag {
+    font-size: 6.5pt;
+    padding: 2px 7px;
+  }
+
+  .solusi-box {
+    padding: 5px 10px;
+    margin-top: 5px;
+    font-size: 7.5pt;
+    line-height: 1.4;
+  }
+
+  .solusi-box .solusi-label {
+    font-size: 6.5pt;
+    margin-bottom: 2px;
+  }
+
+  /* ---- Compact Disclaimer ---- */
+  .disclaimer {
+    padding: 6px 12px;
+    font-size: 7pt;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+
+  /* ---- Compact Footer ---- */
+  .report-footer {
+    padding-top: 10px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .footer-left {
+    font-size: 6.5pt;
+    line-height: 1.6;
+  }
+
+  .footer-signature {
+    min-width: 140px;
+  }
+
+  .signature-space {
+    height: 36px;
+  }
+
+  .signature-line {
+    width: 140px;
+  }
+
+  .signature-name {
+    font-size: 7.5pt;
+  }
+
+  .signature-role {
+    font-size: 6.5pt;
+  }
+
+  .no-data-msg { display: none !important; }
+}
+
+/* ---------- Responsive (small screens) ---------- */
+@media screen and (max-width: 640px) {
+  .paper {
+    margin: 12px;
+    padding: 24px 20px;
+  }
+
+  .report-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .header-right {
+    text-align: left;
+  }
+
+  .report-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .toolbar {
+    padding: 10px 16px;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

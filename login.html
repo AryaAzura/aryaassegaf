@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login - Sistem Pakar Diagnosa Kerusakan">
+  <title>Login — Sistem Pakar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-base:     #0a0f1e;
+      --bg-card:     rgba(255,255,255,0.04);
+      --bg-input:    rgba(255,255,255,0.06);
+      --border:      rgba(255,255,255,0.1);
+      --border-focus:rgba(99,102,241,0.7);
+      --accent:      #6366f1;
+      --accent-glow: rgba(99,102,241,0.4);
+      --accent2:     #8b5cf6;
+      --text-primary:#f1f5f9;
+      --text-muted:  #94a3b8;
+      --error:       #ef4444;
+      --success:     #22c55e;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── Animated background blobs ── */
+    .bg-blobs {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.35;
+      animation: blobFloat 8s ease-in-out infinite;
+    }
+    .blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, #6366f1, #4338ca); top: -150px; left: -120px; animation-duration: 9s; }
+    .blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, #8b5cf6, #6d28d9); bottom: -100px; right: -100px; animation-duration: 11s; animation-delay: -3s; }
+    .blob-3 { width: 300px; height: 300px; background: radial-gradient(circle, #06b6d4, #0284c7); top: 50%; left: 50%; transform: translate(-50%,-50%); animation-duration: 7s; animation-delay: -5s; opacity: 0.2; }
+
+    @keyframes blobFloat {
+      0%, 100% { transform: scale(1) translateY(0); }
+      33%       { transform: scale(1.08) translateY(-20px); }
+      66%       { transform: scale(0.95) translateY(15px); }
+    }
+
+    /* ── Login card ── */
+    .login-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+    }
+
+    .login-card {
+      background: rgba(15, 20, 40, 0.7);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 44px 40px 40px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03);
+      animation: cardIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(30px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ── Brand ── */
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 36px;
+      text-align: center;
+    }
+
+    .brand-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px var(--accent-glow);
+      animation: iconPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes iconPulse {
+      0%, 100% { box-shadow: 0 8px 32px var(--accent-glow); }
+      50%       { box-shadow: 0 8px 48px rgba(99,102,241,0.6); }
+    }
+
+    .brand-icon svg { color: #fff; }
+
+    .brand h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #e2e8f0, #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+
+    .brand p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── Form ── */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 8px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 13px 14px 13px 44px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      outline: none;
+      transition: all 0.25s;
+    }
+
+    .form-input::placeholder { color: rgba(148,163,184,0.5); }
+
+    .form-input:focus {
+      border-color: var(--border-focus);
+      background: rgba(99,102,241,0.06);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+    }
+
+    .form-input:focus + .input-icon,
+    .input-wrapper:focus-within .input-icon {
+      color: var(--accent);
+    }
+
+    /* Password toggle */
+    .pwd-toggle {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      padding: 2px;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+    }
+    .pwd-toggle:hover { color: var(--text-primary); }
+
+    /* ── Error message ── */
+    .error-msg {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #fca5a5;
+      font-size: 0.82rem;
+      margin-bottom: 20px;
+      animation: shakeX 0.4s ease;
+    }
+    .error-msg.show { display: flex; }
+
+    @keyframes shakeX {
+      0%,100%{ transform: translateX(0); }
+      20%    { transform: translateX(-6px); }
+      40%    { transform: translateX(6px); }
+      60%    { transform: translateX(-4px); }
+      80%    { transform: translateX(4px); }
+    }
+
+    /* ── Submit button ── */
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s;
+      letter-spacing: 0.02em;
+      margin-top: 4px;
+    }
+
+    .btn-login::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.12);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .btn-login:hover::before { opacity: 1; }
+    .btn-login:active { transform: scale(0.98); }
+
+    .btn-login:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-login .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Divider ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Demo credentials ── */
+    .demo-box {
+      background: rgba(99,102,241,0.06);
+      border: 1px solid rgba(99,102,241,0.2);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .demo-box strong { color: #a5b4fc; }
+    .demo-box .demo-fill {
+      display: inline-block;
+      margin-top: 8px;
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: 500;
+      font-size: 0.76rem;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .demo-box .demo-fill:hover { color: #a5b4fc; }
+
+    /* ── Footer ── */
+    .login-footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.72rem;
+      color: rgba(148,163,184,0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background blobs -->
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+
+      <!-- Brand -->
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Sistem Pakar</h1>
+          <p>Diagnosa Kerusakan — Rule Based Expert System</p>
+        </div>
+      </div>
+
+      <!-- Error message -->
+      <div class="error-msg" id="errorMsg">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+        </svg>
+        <span id="errorText">Username atau password salah</span>
+      </div>
+
+      <!-- Form -->
+      <form id="loginForm" autocomplete="off">
+
+        <div class="form-group">
+          <label class="form-label" for="inputUsername">Username</label>
+          <div class="input-wrapper">
+            <input
+              type="text"
+              class="form-input"
+              id="inputUsername"
+              name="username"
+              placeholder="Masukkan username..."
+              autocomplete="username"
+              required
+            >
+            <span class="input-icon">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inputPassword">Password</label>
+          <div class="input-wrapper">
+            <input
+              type="password"
+              class="form-input"
+              id="inputPassword"
+              name="password"
+              placeholder="Masukkan password..."
+              autocomplete="current-password"
+              required
+            >
+            <span class="input-icon">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </span>
+            <button type="button" class="pwd-toggle" id="pwdToggle" title="Tampilkan / sembunyikan password">
+              <svg id="eyeIcon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button class="btn-login" type="submit" id="btnLogin">
+          Masuk
+        </button>
+      </form>
+
+      <div class="divider">Akun Default</div>
+
+      <!-- Demo credentials -->
+      <div class="demo-box">
+        <strong>Admin:</strong> admin / admin123<br>
+        <strong>User:</strong> user / user123
+        <br>
+        <span class="demo-fill" id="fillAdmin">→ Isi akun admin</span>
+        &nbsp;·&nbsp;
+        <span class="demo-fill" id="fillUser">→ Isi akun user</span>
+      </div>
+
+    </div>
+
+    <div class="login-footer">
+      &copy; 2025 Sistem Pakar Diagnosa Kerusakan
+    </div>
+  </div>
+
+  <script>
+    // ── Check if already logged in ──
+    async function checkSession() {
+      try {
+        const res = await fetch('api/auth.php?action=check', {
+          credentials: 'same-origin'
+        });
+        const data = await res.json();
+        if (data.loggedIn) {
+          window.location.replace('index.html');
+        }
+      } catch (_) {}
+    }
+    checkSession();
+
+    // ── Password toggle ──
+    const pwdToggle = document.getElementById('pwdToggle');
+    const inputPwd  = document.getElementById('inputPassword');
+    const eyeIcon   = document.getElementById('eyeIcon');
+
+    pwdToggle.addEventListener('click', () => {
+      const isHidden = inputPwd.type === 'password';
+      inputPwd.type = isHidden ? 'text' : 'password';
+      eyeIcon.innerHTML = isHidden
+        ? `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+           <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+           <line x1="1" y1="1" x2="23" y2="23"/>`
+        : `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
+    });
+
+    // ── Demo fill buttons ──
+    document.getElementById('fillAdmin').addEventListener('click', () => {
+      document.getElementById('inputUsername').value = 'admin';
+      document.getElementById('inputPassword').value = 'admin123';
+    });
+    document.getElementById('fillUser').addEventListener('click', () => {
+      document.getElementById('inputUsername').value = 'user';
+      document.getElementById('inputPassword').value = 'user123';
+    });
+
+    // ── Login form submit ──
+    const form     = document.getElementById('loginForm');
+    const btnLogin = document.getElementById('btnLogin');
+    const errorMsg = document.getElementById('errorMsg');
+    const errorTxt = document.getElementById('errorText');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('inputUsername').value.trim();
+      const password = document.getElementById('inputPassword').value.trim();
+
+      errorMsg.classList.remove('show');
+      btnLogin.disabled = true;
+      btnLogin.innerHTML = '<span class="spinner"></span>Memproses...';
+
+      try {
+        const res = await fetch('api/auth.php?action=login', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          btnLogin.innerHTML = '✓ Berhasil! Mengalihkan...';
+          btnLogin.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+          setTimeout(() => window.location.replace('index.html'), 800);
+        } else {
+          showError(data.error || 'Login gagal. Coba lagi.');
+        }
+      } catch (err) {
+        showError('Tidak dapat terhubung ke server. Pastikan XAMPP aktif.');
+      }
+    });
+
+    function showError(msg) {
+      errorTxt.textContent = msg;
+      errorMsg.classList.add('show');
+      btnLogin.disabled = false;
+      btnLogin.innerHTML = 'Masuk';
+      document.getElementById('inputPassword').value = '';
+      document.getElementById('inputPassword').focus();
+    }
+  </script>
+</body>
+</html>

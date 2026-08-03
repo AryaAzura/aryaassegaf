@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900" style="background-color: #F3F4F6; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <!-- Background -->
+  <rect width="1440" height="900" fill="#F3F4F6"/>
+  
+  <!-- Top Header Card -->
+  <rect x="170" y="40" width="1100" height="90" rx="12" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  
+  <!-- Icon & Title -->
+  <rect x="190" y="60" width="50" height="50" rx="12" fill="#F9FAFB" stroke="#D1D5DB" stroke-width="2"/>
+  <rect x="202" y="72" width="26" height="26" rx="4" fill="none" stroke="#9CA3AF" stroke-width="2.5"/>
+  <line x1="215" y1="72" x2="215" y2="98" stroke="#9CA3AF" stroke-width="2.5"/>
+  <line x1="202" y1="83" x2="228" y2="83" stroke="#9CA3AF" stroke-width="2.5"/>
+  
+  <text x="255" y="73" font-size="20" font-weight="700" fill="#111827">Sistem Pakar</text>
+  <text x="255" y="93" font-size="12" font-weight="400" fill="#6B7280">Diagnosa Kerusakan — Case Based Reasoning</text>
+  
+  <!-- Stats -->
+  <rect x="620" y="55" width="70" height="60" rx="8" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="655" y="80" text-anchor="middle" font-size="16" font-weight="700" fill="#111827">28</text>
+  <text x="655" y="95" text-anchor="middle" font-size="9" font-weight="600" fill="#6B7280">GEJALA</text>
+  
+  <rect x="700" y="55" width="80" height="60" rx="8" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="740" y="80" text-anchor="middle" font-size="16" font-weight="700" fill="#111827">8</text>
+  <text x="740" y="95" text-anchor="middle" font-size="9" font-weight="600" fill="#6B7280">KERUSAKAN</text>
+  
+  <rect x="790" y="55" width="70" height="60" rx="8" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="825" y="80" text-anchor="middle" font-size="16" font-weight="700" fill="#111827">4</text>
+  <text x="825" y="95" text-anchor="middle" font-size="9" font-weight="600" fill="#6B7280">KASUS</text>
+  
+  <!-- Actions -->
+  <rect x="880" y="69" width="80" height="32" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="920" y="90" text-anchor="middle" font-size="12" font-weight="600" fill="#4B5563">↓ Export</text>
+  
+  <rect x="970" y="69" width="80" height="32" rx="6" fill="#111827"/>
+  <text x="1010" y="90" text-anchor="middle" font-size="12" font-weight="600" fill="#FFFFFF">↑ Import</text>
+  
+  <rect x="1060" y="69" width="130" height="32" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <!-- User icon placeholder -->
+  <circle cx="1076" cy="81" r="4" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+  <path d="M1070 90 C1070 86, 1082 86, 1082 90" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+  <text x="1088" y="90" font-size="12" font-weight="600" fill="#4B5563">Administrator</text>
+  <!-- badge admin inside button -->
+  <rect x="1145" y="74" width="35" height="18" rx="4" fill="#F3F4F6"/>
+  <text x="1162" y="86" text-anchor="middle" font-size="8" font-weight="700" fill="#4B5563">ADMIN</text>
+  
+  <rect x="1200" y="69" width="50" height="32" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <path d="M1214 85 L1217 85 M1217 85 L1215 83 M1217 85 L1215 87" fill="none" stroke="#EF4444" stroke-width="1.5"/>
+  <rect x="1212" y="78" width="8" height="14" rx="2" fill="none" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="1225" y="90" font-size="12" font-weight="600" fill="#EF4444">Out</text>
+  
+  <!-- Navigation Card -->
+  <rect x="170" y="140" width="1100" height="50" rx="12" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  
+  <rect x="178" y="145" width="130" height="40" rx="8" fill="#111827"/>
+  <text x="243" y="170" text-anchor="middle" font-size="13" font-weight="600" fill="#FFFFFF">Daftar Gejala</text>
+  
+  <text x="360" y="170" font-size="13" font-weight="600" fill="#4B5563">Daftar Kerusakan</text>
+  <text x="500" y="170" font-size="13" font-weight="600" fill="#4B5563">Basis Kasus</text>
+  <text x="610" y="170" font-size="13" font-weight="600" fill="#4B5563">Riwayat</text>
+  <text x="700" y="170" font-size="13" font-weight="600" fill="#4B5563">Diagnosa</text>
+  
+  <!-- Content Header -->
+  <text x="170" y="240" font-size="22" font-weight="700" fill="#111827">Daftar Gejala</text>
+  <text x="170" y="265" font-size="13" font-weight="400" fill="#6B7280">Kelola semua data gejala yang digunakan dalam sistem pakar.</text>
+  
+  <rect x="1110" y="225" width="160" height="40" rx="8" fill="#111827"/>
+  <text x="1190" y="250" text-anchor="middle" font-size="14" font-weight="600" fill="#FFFFFF">+ Tambah Gejala</text>
+  
+  <!-- Search Bar -->
+  <rect x="170" y="300" width="1100" height="48" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <circle cx="190" cy="324" r="6" fill="none" stroke="#9CA3AF" stroke-width="2"/>
+  <line x1="195" y1="329" x2="200" y2="334" stroke="#9CA3AF" stroke-width="2"/>
+  <text x="215" y="329" font-size="14" fill="#9CA3AF">Cari gejala...</text>
+
+  <!-- Table Card -->
+  <rect x="170" y="365" width="1100" height="400" rx="12" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  
+  <!-- Table Header -->
+  <text x="195" y="405" font-size="11" font-weight="700" fill="#6B7280" letter-spacing="1">KODE</text>
+  <text x="270" y="405" font-size="11" font-weight="700" fill="#6B7280" letter-spacing="1">NAMA GEJALA</text>
+  <text x="1040" y="400" font-size="11" font-weight="700" fill="#6B7280" letter-spacing="1">BOBOT</text>
+  <text x="1040" y="415" font-size="11" font-weight="700" fill="#6B7280" letter-spacing="1">(CBR)</text>
+  <text x="1150" y="405" font-size="11" font-weight="700" fill="#6B7280" letter-spacing="1">AKSI</text>
+  <line x1="170" y1="430" x2="1270" y2="430" stroke="#E5E7EB" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="190" y="452" width="44" height="24" rx="12" fill="#F3F4F6"/>
+  <text x="212" y="468" text-anchor="middle" font-size="11" font-weight="600" fill="#4B5563">G01</text>
+  <text x="270" y="469" font-size="13" font-weight="700" fill="#111827">Starter lemah</text>
+  
+  <rect x="1035" y="452" width="40" height="24" rx="12" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="1055" y="468" text-anchor="middle" font-size="11" font-weight="700" fill="#374151">0.5</text>
+  
+  <!-- Edit btn -->
+  <rect x="1140" y="448" width="32" height="32" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <path d="M1150 460 L1160 450 L1164 454 L1154 464 L1148 466 Z" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+  <!-- Delete btn -->
+  <rect x="1180" y="448" width="32" height="32" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <path d="M1190 453 H1202 M1193 453 V464 C1193 465 1199 465 1199 464 V453 M1194 450 H1198" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+  
+  <line x1="170" y1="495" x2="1270" y2="495" stroke="#E5E7EB" stroke-width="1"/>
+
+  <!-- Row 2 -->
+  <rect x="190" y="517" width="44" height="24" rx="12" fill="#F3F4F6"/>
+  <text x="212" y="533" text-anchor="middle" font-size="11" font-weight="600" fill="#4B5563">G02</text>
+  <text x="270" y="534" font-size="13" font-weight="700" fill="#111827">Lampu redup</text>
+  
+  <rect x="1035" y="517" width="40" height="24" rx="12" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="1055" y="533" text-anchor="middle" font-size="11" font-weight="700" fill="#374151">0.3</text>
+  
+  <rect x="1140" y="513" width="32" height="32" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <path d="M1150 525 L1160 515 L1164 519 L1154 529 L1148 531 Z" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+  <rect x="1180" y="513" width="32" height="32" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <path d="M1190 518 H1202 M1193 518 V529 C1193 530 1199 530 1199 529 V518 M1194 515 H1198" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+
+  <line x1="170" y1="560" x2="1270" y2="560" stroke="#E5E7EB" stroke-width="1"/>
+
+  <!-- Row 3 -->
+  <rect x="190" y="582" width="44" height="24" rx="12" fill="#F3F4F6"/>
+  <text x="212" y="598" text-anchor="middle" font-size="11" font-weight="600" fill="#4B5563">G03</text>
+  <text x="270" y="599" font-size="13" font-weight="700" fill="#111827">Mesin susah hidup</text>
+  
+  <rect x="1035" y="582" width="40" height="24" rx="12" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="1055" y="598" text-anchor="middle" font-size="11" font-weight="700" fill="#374151">0.4</text>
+  
+  <rect x="1140" y="578" width="32" height="32" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <path d="M1150 590 L1160 580 L1164 584 L1154 594 L1148 596 Z" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+  <rect x="1180" y="578" width="32" height="32" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <path d="M1190 583 H1202 M1193 583 V594 C1193 595 1199 595 1199 594 V583 M1194 580 H1198" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+
+  <line x1="170" y1="625" x2="1270" y2="625" stroke="#E5E7EB" stroke-width="1"/>
+
+  <!-- Row 4 -->
+  <rect x="190" y="647" width="44" height="24" rx="12" fill="#F3F4F6"/>
+  <text x="212" y="663" text-anchor="middle" font-size="11" font-weight="600" fill="#4B5563">G04</text>
+  <text x="270" y="664" font-size="13" font-weight="700" fill="#111827">Mesin mati mendadak</text>
+  
+  <rect x="1035" y="647" width="40" height="24" rx="12" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="1055" y="663" text-anchor="middle" font-size="11" font-weight="700" fill="#374151">0.4</text>
+  
+  <rect x="1140" y="643" width="32" height="32" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <path d="M1150 655 L1160 645 L1164 649 L1154 659 L1148 661 Z" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+  <rect x="1180" y="643" width="32" height="32" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <path d="M1190 648 H1202 M1193 648 V659 C1193 660 1199 660 1199 659 V648 M1194 645 H1198" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+
+  <line x1="170" y1="690" x2="1270" y2="690" stroke="#E5E7EB" stroke-width="1"/>
+  
+  <!-- Row 5 -->
+  <rect x="190" y="712" width="44" height="24" rx="12" fill="#F3F4F6"/>
+  <text x="212" y="728" text-anchor="middle" font-size="11" font-weight="600" fill="#4B5563">G05</text>
+  <text x="270" y="729" font-size="13" font-weight="700" fill="#111827">Mesin brebet</text>
+  
+  <rect x="1035" y="712" width="40" height="24" rx="12" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="1055" y="728" text-anchor="middle" font-size="11" font-weight="700" fill="#374151">0.3</text>
+  
+  <rect x="1140" y="708" width="32" height="32" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <path d="M1150 720 L1160 710 L1164 714 L1154 724 L1148 726 Z" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+  <rect x="1180" y="708" width="32" height="32" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <path d="M1190 713 H1202 M1193 713 V724 C1193 725 1199 725 1199 724 V713 M1194 710 H1198" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+
+</svg>

@@ -3,6 +3,23 @@
    Premium Dark Theme with Glassmorphism
    ============================================================ */
 
+/* ---------- Role-based Access (CSS backup layer) ---------- */
+body.role-user #tabBtnGejala,
+body.role-user #tabBtnKerusakan,
+body.role-user #tabBtnRule,
+body.role-user #panelGejala,
+body.role-user #panelKerusakan,
+body.role-user #panelRule,
+body.role-user #btnExport,
+body.role-user #btnImport,
+body.role-user #fileInput,
+body.role-user #headerStats,
+body.role-user #headerDataActions {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 /* ---------- CSS Variables ---------- */
 :root {
   --bg-primary: #0a0e1a;
@@ -130,24 +147,27 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 24px;
+  gap: 16px;
+  padding: 16px 24px;
   background: var(--bg-glass);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: 14px;
+  flex-shrink: 0;
 }
 
 .logo-icon {
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -155,10 +175,11 @@ body {
   border-radius: var(--radius-md);
   color: white;
   box-shadow: 0 4px 15px var(--accent-glow);
+  flex-shrink: 0;
 }
 
 .logo h1 {
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   background: linear-gradient(135deg, var(--text-primary), var(--accent-hover));
@@ -168,39 +189,130 @@ body {
 }
 
 .logo .subtitle {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   font-weight: 400;
 }
 
+/* ── Header right section ── */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+/* ── Stats ── */
 .header-stats {
   display: flex;
-  gap: 12px;
+  gap: 8px;
 }
 
 .stat-badge {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8px 16px;
+  padding: 6px 14px;
   background: var(--bg-glass);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  min-width: 70px;
+  min-width: 62px;
 }
 
 .stat-num {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--accent-hover);
+  line-height: 1.2;
 }
 
 .stat-label {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-weight: 500;
+}
+
+/* ── Data action buttons (Export/Import) ── */
+.header-data-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.data-actions-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+  margin-right: 4px;
+}
+
+/* ── User info & logout ── */
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 10px;
+  border-left: 1px solid var(--border);
+}
+
+.user-info-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 11px;
+}
+
+.user-nama {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.user-role-badge {
+  font-size: 0.64rem;
+  background: rgba(99,102,241,0.2);
+  color: #a5b4fc;
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.btn-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  background: transparent;
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: var(--radius-sm);
+  color: #f87171;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.btn-logout:hover {
+  background: rgba(239,68,68,0.1);
+  border-color: rgba(239,68,68,0.55);
+  color: #fca5a5;
+}
+
+.btn-logout:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* ---------- Tab Navigation ---------- */
@@ -350,6 +462,40 @@ body {
 .btn-danger:hover {
   background: #dc2626;
 }
+
+.btn-print {
+  background: linear-gradient(135deg, #059669, #047857);
+  color: white;
+  box-shadow: 0 2px 10px rgba(5, 150, 105, 0.3);
+}
+
+.btn-print:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(5, 150, 105, 0.4);
+}
+
+.btn-danger-outline {
+  background: transparent;
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.btn-danger-outline:hover {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.6);
+  color: #fca5a5;
+}
+
 
 .btn-full {
   width: 100%;
@@ -1153,3 +1299,303 @@ select.form-input option {
     padding: 10px 12px;
   }
 }
+
+/* ============================================================
+   PRINT STYLES - Laporan Diagnosa
+   ============================================================ */
+@media print {
+  /* Hide everything except the print report */
+  body > *:not(#printReport) {
+    display: none !important;
+  }
+  #printReport {
+    display: block !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    color: #000;
+    font-family: 'Inter', 'Arial', sans-serif;
+    z-index: 9999;
+    padding: 0;
+    margin: 0;
+  }
+  @page {
+    size: A4 portrait;
+    margin: 20mm 15mm 20mm 15mm;
+  }
+}
+
+/* Print Report Layout (visible on screen only when printing) */
+#printReport {
+  display: none;
+  font-family: 'Inter', 'Arial', sans-serif;
+  background: white;
+  color: #1a1a1a;
+}
+
+/* --- Print Header --- */
+.print-header {
+  border-bottom: 3px solid #4f46e5;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.print-logo-area {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.print-logo-icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.print-app-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e1b4b;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.print-app-sub {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin: 2px 0 0;
+}
+
+.print-doc-info {
+  text-align: right;
+  font-size: 0.75rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.print-doc-info strong {
+  color: #374151;
+}
+
+/* --- Print Title --- */
+.print-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.print-title h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1e1b4b;
+  margin: 0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.print-title p {
+  font-size: 0.82rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* --- Patient Info Table --- */
+.print-patient-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 0.82rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.print-patient-table th {
+  background: #f3f4f6;
+  color: #374151;
+  font-weight: 600;
+  padding: 8px 14px;
+  text-align: left;
+  width: 35%;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.print-patient-table td {
+  padding: 8px 14px;
+  color: #111827;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.print-patient-table tr:last-child th,
+.print-patient-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* --- Gejala Dipilih Section --- */
+.print-section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #4f46e5;
+  margin: 16px 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.print-gejala-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.print-gejala-tag {
+  background: #ede9fe;
+  color: #4c1d95;
+  font-size: 0.73rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid #c4b5fd;
+}
+
+/* --- Result Cards in Print --- */
+.print-result-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.print-result-card.rank-1 {
+  border-color: #22c55e;
+  background: #f0fdf4;
+}
+
+.print-result-card.rank-2 {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.print-result-card.rank-other {
+  border-color: #e5e7eb;
+  background: #f9fafb;
+}
+
+.print-result-rank {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.print-result-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.print-result-pct {
+  font-size: 0.82rem;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.print-progress-wrap {
+  background: #e5e7eb;
+  border-radius: 99px;
+  height: 8px;
+  width: 100%;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.print-progress-bar {
+  height: 8px;
+  border-radius: 99px;
+}
+
+.print-matched-gejala {
+  font-size: 0.73rem;
+  color: #6b7280;
+  margin-bottom: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.print-solusi-box {
+  background: #fff7ed;
+  border-left: 3px solid #f59e0b;
+  border-radius: 0 6px 6px 0;
+  padding: 8px 12px;
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.print-solusi-box strong {
+  color: #d97706;
+  display: block;
+  margin-bottom: 3px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- Print Footer --- */
+.print-footer {
+  border-top: 2px solid #e5e7eb;
+  padding-top: 16px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.print-signature {
+  text-align: center;
+}
+
+.print-signature-line {
+  width: 160px;
+  border-bottom: 1px solid #6b7280;
+  margin: 0 auto 4px;
+  height: 48px;
+}
+
+.print-signature p {
+  margin: 0;
+  color: #374151;
+  font-size: 0.75rem;
+}
+
+.print-disclaimer {
+  font-size: 0.7rem;
+  color: #9ca3af;
+  text-align: center;
+  margin-top: 12px;
+  font-style: italic;
+}
+
