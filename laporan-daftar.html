@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laporan Daftar Data Sistem Pakar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="laporan.css">
+</head>
+<body>
+  <div class="toolbar no-print">
+    <div class="toolbar-left">
+      <a href="index.html" class="toolbar-back">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        Kembali ke Sistem Pakar
+      </a>
+    </div>
+    <div class="toolbar-right">
+      <button class="toolbar-btn" onclick="window.print()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Cetak / Simpan PDF
+      </button>
+    </div>
+  </div>
+
+  <div class="paper" id="reportPaper">
+    <header class="report-header">
+      <div class="header-left">
+        <div class="header-logo">
+          <img src="Logo Transparan.png" alt="Logo Sistem Pakar">
+        </div>
+        <div>
+          <h1 class="header-title">Sistem Pakar Diagnosa Kerusakan</h1>
+          <p class="header-sub">Case Based Expert System</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="doc-meta"><span>No. Dokumen</span><strong id="docNo">—</strong></div>
+        <div class="doc-meta"><span>Waktu</span><strong id="docWaktu">—</strong></div>
+      </div>
+    </header>
+
+    <div class="report-title">
+      <h2 id="reportTitle">LAPORAN DAFTAR DATA</h2>
+      <p id="reportSubtitle">Dokumen daftar data yang dibuat secara otomatis oleh sistem.</p>
+    </div>
+
+    <section class="section">
+      <div class="section-heading">Informasi Laporan</div>
+      <table class="info-table" id="infoTable">
+        <tr><th>Dibuat Oleh</th><td id="infoDibuatOleh">—</td></tr>
+        <tr><th>Jenis Data</th><td id="infoJenisData">—</td></tr>
+        <tr><th>Tanggal Pembuatan</th><td id="infoTanggal">—</td></tr>
+        <tr><th>Jumlah Data</th><td id="infoJumlahData">—</td></tr>
+      </table>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">Daftar Data</div>
+      <table class="gejala-table" id="daftarTable">
+        <thead>
+          <tr>
+            <th width="60">No</th>
+            <th width="90">Kode</th>
+            <th>Nama</th>
+            <th>Detail</th>
+            <th width="180">Keterangan</th>
+          </tr>
+        </thead>
+        <tbody id="daftarBody"></tbody>
+      </table>
+    </section>
+
+    <footer class="report-footer">
+      <div class="footer-left">
+        <p>Dicetak oleh: Sistem Pakar Diagnosa Kerusakan</p>
+        <p id="footerDocNo">—</p>
+      </div>
+      <div class="footer-signature">
+        <div class="doc-meta signature-date"><strong id="docTanggal">—</strong></div>
+        <div class="signature-gap"></div>
+        <p class="signature-role">Administrator</p>
+        <div class="signature-space-under-role"></div>
+        <div class="signature-line"></div>
+        <p class="signature-name" id="signatureName">—</p>
+      </div>
+    </footer>
+  </div>
+
+  <div class="no-data-msg" id="noDataMsg" style="display:none;">
+    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.5">
+      <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+    </svg>
+    <h3>Tidak Ada Data Laporan</h3>
+    <p>Silakan generate daftar data terlebih dahulu di halaman utama, lalu klik tombol cetak daftar.</p>
+    <a href="index.html" class="back-link">← Kembali ke Sistem Pakar</a>
+  </div>
+
+  <script src="laporan-daftar.js"></script>
+</body>
+</html>

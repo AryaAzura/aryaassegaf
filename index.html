@@ -29,7 +29,6 @@
   </script>
 </head>
 <body>
-  <!-- Background animated blobs -->
   <div class="bg-blobs">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
@@ -37,25 +36,19 @@
   </div>
 
   <div class="app-container">
-    <!-- Header -->
     <header class="app-header">
-      <!-- Logo -->
       <div class="logo">
         <div class="logo-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
-          </svg>
+          <img src="Logo Transparan.png" alt="Logo Sistem Pakar">
         </div>
         <div>
           <h1>Sistem Pakar</h1>
-          <p class="subtitle">Diagnosa Kerusakan — Case Based Reasoning</p>
+          <p class="subtitle">Diagnosa Kerusakan Metode Case Based Reasoning</p>
         </div>
       </div>
 
-      <!-- Right side -->
       <div class="header-right">
 
-        <!-- Stats (admin only) -->
         <div class="header-stats" id="headerStats">
           <div class="stat-badge">
             <span class="stat-num" id="statGejala">0</span>
@@ -71,7 +64,6 @@
           </div>
         </div>
 
-        <!-- Data actions (admin only) -->
         <div class="header-data-actions" id="headerDataActions">
           <div class="data-actions-divider"></div>
           <button class="btn btn-secondary btn-sm" id="btnExport">
@@ -85,7 +77,6 @@
           <input type="file" id="fileInput" accept="application/json" style="display:none" />
         </div>
 
-        <!-- User badge + Logout -->
         <div class="header-user" id="userBadge">
           <div class="user-info-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity="0.6"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -102,7 +93,6 @@
     </header>
 
 
-    <!-- Tab Navigation -->
     <nav class="tab-nav">
       <button class="tab-btn active" data-tab="gejala" id="tabBtnGejala">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -136,20 +126,28 @@
       </button>
     </nav>
 
-    <!-- Tab Content -->
     <main class="tab-content">
 
-      <!-- ==================== TAB GEJALA ==================== -->
       <section class="tab-panel active" id="panelGejala">
         <div class="panel-header">
           <div>
             <h2>Daftar Gejala</h2>
             <p>Kelola semua data gejala yang digunakan dalam sistem pakar.</p>
           </div>
-          <button class="btn btn-primary" id="btnAddGejala" onclick="openModal('gejala')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Tambah Gejala
-          </button>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <button class="btn btn-secondary btn-sm" onclick="cetakDaftarLaporan('gejala')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Cetak
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="exportDaftarCsv('gejala')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              CSV
+            </button>
+            <button class="btn btn-primary" id="btnAddGejala" onclick="openModal('gejala')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Tambah Gejala
+            </button>
+          </div>
         </div>
         <div class="search-bar">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -175,17 +173,26 @@
         </div>
       </section>
 
-      <!-- ==================== TAB KERUSAKAN ==================== -->
       <section class="tab-panel" id="panelKerusakan">
         <div class="panel-header">
           <div>
             <h2>Daftar Kerusakan</h2>
             <p>Kelola semua data kerusakan yang dapat didiagnosa oleh sistem.</p>
           </div>
-          <button class="btn btn-primary" id="btnAddKerusakan" onclick="openModal('kerusakan')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Tambah Kerusakan
-          </button>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <button class="btn btn-secondary btn-sm" onclick="cetakDaftarLaporan('kerusakan')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Cetak
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="exportDaftarCsv('kerusakan')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              CSV
+            </button>
+            <button class="btn btn-primary" id="btnAddKerusakan" onclick="openModal('kerusakan')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Tambah Kerusakan
+            </button>
+          </div>
         </div>
         <div class="search-bar">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -211,17 +218,26 @@
         </div>
       </section>
 
-      <!-- ==================== TAB RULE ==================== -->
       <section class="tab-panel" id="panelRule">
         <div class="panel-header">
           <div>
             <h2>Basis Kasus</h2>
             <p>Kelola kasus basis — pasangan gejala dan kerusakan yang digunakan CBR untuk pencocokan.</p>
           </div>
-          <button class="btn btn-primary" id="btnAddRule" onclick="openModal('rule')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Tambah Kasus
-          </button>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <button class="btn btn-secondary btn-sm" onclick="cetakDaftarLaporan('rule')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Cetak
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="exportDaftarCsv('rule')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              CSV
+            </button>
+            <button class="btn btn-primary" id="btnAddRule" onclick="openModal('rule')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Tambah Kasus
+            </button>
+          </div>
         </div>
         <div class="table-wrapper">
           <table class="data-table" id="tableRule">
@@ -243,17 +259,26 @@
         </div>
       </section>
 
-      <!-- ==================== TAB RIWAYAT ==================== -->
       <section class="tab-panel" id="panelRiwayat">
         <div class="panel-header">
           <div>
             <h2>Riwayat Diagnosa</h2>
             <p>Histori seluruh sesi diagnosa & validasi CBR (fase <em>Revise</em>).</p>
           </div>
-          <button class="btn btn-secondary btn-sm" onclick="loadRiwayat()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-            Refresh
-          </button>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <button class="btn btn-secondary btn-sm" onclick="cetakDaftarLaporan('riwayat')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Cetak
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="exportDaftarCsv('riwayat')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              CSV
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="loadRiwayat()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Refresh
+            </button>
+          </div>
         </div>
         <div class="table-wrapper">
           <table class="data-table" id="tableRiwayat">
@@ -281,7 +306,6 @@
         </div>
       </section>
 
-      <!-- ==================== TAB DIAGNOSA ==================== -->
       <section class="tab-panel" id="panelDiagnosa">
         <div class="panel-header">
           <div>
@@ -336,7 +360,6 @@
     </main>
   </div>
 
-  <!-- ==================== MODAL ==================== -->
   <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
     <div class="modal" id="modal" onclick="event.stopPropagation()">
       <div class="modal-header">
@@ -351,10 +374,8 @@
     </div>
   </div>
 
-  <!-- Toast container -->
   <div class="toast-container" id="toastContainer"></div>
 
-  <!-- Confirm dialog -->
   <div class="confirm-overlay" id="confirmOverlay">
     <div class="confirm-dialog">
       <div class="confirm-icon">
@@ -371,7 +392,6 @@
 
   <script src="app.js"></script>
 
-  <!-- ==================== PRINT REPORT CONTAINER ==================== -->
   <div id="printReport"></div>
 
 </body>

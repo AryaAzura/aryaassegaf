@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laporan Diagnosa — Sistem Pakar</title>
+  <title>Laporan Diagnosa Sistem Pakar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,7 +11,6 @@
 </head>
 <body>
 
-  <!-- Toolbar (hidden on print) -->
   <div class="toolbar no-print">
     <div class="toolbar-left">
       <a href="index.html" class="toolbar-back">
@@ -27,20 +26,16 @@
     </div>
   </div>
 
-  <!-- Report Paper -->
   <div class="paper" id="reportPaper">
 
-    <!-- Header -->
     <header class="report-header">
       <div class="header-left">
         <div class="header-logo">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
-          </svg>
+          <img src="Logo Transparan.png" alt="Logo Sistem Pakar">
         </div>
         <div>
           <h1 class="header-title">Sistem Pakar Diagnosa Kerusakan</h1>
-          <p class="header-sub">Rule Based Expert System</p>
+          <p class="header-sub">Case Based Expert System</p>
         </div>
       </div>
       <div class="header-right">
@@ -49,13 +44,11 @@
       </div>
     </header>
 
-    <!-- Title -->
     <div class="report-title">
       <h2>LAPORAN HASIL DIAGNOSA KERUSAKAN</h2>
-      <p>Dokumen ini diterbitkan secara otomatis oleh Sistem Pakar berbasis Rule Based</p>
+      <p>Dokumen ini diterbitkan secara otomatis oleh Sistem Pakar berbasis Case Based</p>
     </div>
 
-    <!-- Patient / Requestor Info -->
     <section class="section">
       <div class="section-heading">Informasi Pasien / Pemohon</div>
       <table class="info-table" id="infoTable">
@@ -67,7 +60,6 @@
       </table>
     </section>
 
-    <!-- Selected Symptoms -->
     <section class="section">
       <div class="section-heading">Gejala yang Dilaporkan</div>
       <table class="gejala-table" id="gejalaTable">
@@ -78,37 +70,33 @@
       </table>
     </section>
 
-    <!-- Diagnosis Results -->
     <section class="section">
       <div class="section-heading">Hasil Diagnosa</div>
       <div id="resultCards"></div>
     </section>
 
-    <!-- Disclaimer -->
     <div class="disclaimer">
       <strong>Catatan:</strong> Hasil diagnosa ini bersifat indikatif berdasarkan kesesuaian gejala dengan basis pengetahuan sistem pakar.
       Disarankan untuk melakukan pemeriksaan lanjutan oleh teknisi atau tenaga ahli yang berwenang.
     </div>
 
-    <!-- Footer / Signature -->
     <footer class="report-footer">
       <div class="footer-left">
         <p>Dicetak oleh: Sistem Pakar Diagnosa Kerusakan</p>
         <p id="footerDocNo">—</p>
       </div>
       <div class="footer-signature">
-        <div class="signature-space"></div>
-        <div class="doc-meta signature-date"><span>Tanggal</span><strong id="docTanggal">—</strong></div>
+        <div class="doc-meta signature-date"><strong id="docTanggal">—</strong></div>
         <div class="signature-gap"></div>
+        <p class="signature-role">Pemeriksa / Teknisi</p>
+        <div class="signature-space-under-role"></div>
         <div class="signature-line"></div>
         <p class="signature-name" id="signatureName">—</p>
-        <p class="signature-role">Pemeriksa / Teknisi</p>
       </div>
     </footer>
 
   </div>
 
-  <!-- No Data Fallback (hidden by default) -->
   <div class="no-data-msg" id="noDataMsg" style="display:none;">
     <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.5">
       <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
